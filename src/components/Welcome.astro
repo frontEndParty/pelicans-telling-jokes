@@ -2,31 +2,11 @@
 import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
 
-const fetchJokes = await fetch("https://v2.jokeapi.dev/joke/[Category/-ies]");
+// const data = await fetchJokes.json();
 
-const data = await fetchJokes.json();
-
-console.log(data);
+// console.log(data);
 
 
-
-const pelicanImgs = [
-    "1642274.webp",
-    "1631255.webp",
-    "1628971.webp",
-    "1631311.webp",
-    "1631232.webp",
-    "203482.webp",
-    "203468.webp",
-    "1641810.webp",
-    "1630631.webp",
-    "1629627.webp",
-    "1630529.webp",
-    "1630530.webp",
-    "1631288.webp",
-    "1630526.webp",
-    "1627749.webp",
-]
 ---
 
 <div id="container">
@@ -34,6 +14,13 @@ const pelicanImgs = [
 	<main>
 		<section id="hero">
 			<h1>Pelican't</h1>
+			<button id="fetchButton">Pelican</button>
+			<div id="container"></div>
+			<div id="joke-container">
+				<p id=""></p>
+				<p id=""></p>
+			</div>
+			<img id="pel-img1"/>
 			</section>
 		</section>
 	</main>
@@ -42,6 +29,50 @@ const pelicanImgs = [
 		<p>donut</p>
 	</a>
 </div>
+
+<script>
+	const fetchJokes = async () => {
+		
+		const pelicanImgs = [
+			"1642274.webp",
+			"1631255.webp",
+			"1628971.webp",
+			"1631311.webp",
+			"1631232.webp",
+			"203482.webp",
+			"203468.webp",
+			"1641810.webp",
+			"1630631.webp",
+			"1629627.webp",
+			"1630529.webp",
+			"1630530.webp",
+			"1631288.webp",
+			"1630526.webp",
+			"1627749.webp",
+		];
+		
+		const div = document.getElementById("container");
+		const divPel1 = document.getElementById("pel-img1");
+
+		const data = (await fetch("https://v2.jokeapi.dev/joke/programming?blacklistFlags=nsfw&type=twopart")
+			.then(data => data.json()));
+
+		const setup = data.setup;
+		const delivery = data.delivery;
+
+		const pel1 = pelicanImgs[Math.floor(Math.random() * pelicanImgs.length)];
+
+		// pelicanImgs[]
+
+		console.dir(data);
+		div!.textContent = JSON.stringify(data);
+
+		divPel1.src = divPel1;
+
+	};
+
+	const fetchButton = document.getElementById("fetchButton")?.addEventListener("click", fetchJokes);
+</script>
 
 <style>
 	#background {
