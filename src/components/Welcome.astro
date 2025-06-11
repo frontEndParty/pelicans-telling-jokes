@@ -1,6 +1,14 @@
 ---
 import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
+
+const fetchJokes = await fetch("https://v2.jokeapi.dev/joke/[Category/-ies]");
+
+const data = await fetchJokes.json();
+
+console.log(data);
+
+
 ---
 
 <div id="container">
