@@ -2,38 +2,10 @@
 import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
 
-// const data = await fetchJokes.json();
-
-// console.log(data);
+import { getImage } from 'astro:assets';
 
 
----
-
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="hero">
-			<h1>Pelican't</h1>
-			<button id="fetchButton">Pelican</button>
-			<div id="container"></div>
-			<div id="joke-container">
-				<p id=""></p>
-				<p id=""></p>
-			</div>
-			<img id="pel-img1"/>
-			</section>
-		</section>
-	</main>
-
-	<a href="https://astro.build/blog/astro-5/" id="news" class="box">
-		<p>donut</p>
-	</a>
-</div>
-
-<script>
-	const fetchJokes = async () => {
-		
-		const pelicanImgs = [
+const pelicanImgs = [
 			"1642274.webp",
 			"1631255.webp",
 			"1628971.webp",
@@ -49,29 +21,90 @@ import background from '../assets/background.svg';
 			"1631288.webp",
 			"1630526.webp",
 			"1627749.webp",
+			"3478579D-9023-4E8A-94DC-8841BE7CF015_1_101_o.jpeg",
+			"287E0123-7ABB-4BA7-954D-5CD4D62EA29E_1_101_o.jpeg"
 		];
-		
-		const div = document.getElementById("container");
-		const divPel1 = document.getElementById("pel-img1");
-
-		const data = (await fetch("https://v2.jokeapi.dev/joke/programming?blacklistFlags=nsfw&type=twopart")
-			.then(data => data.json()));
-
-		const setup = data.setup;
-		const delivery = data.delivery;
 
 		const pel1 = pelicanImgs[Math.floor(Math.random() * pelicanImgs.length)];
 
-		// pelicanImgs[]
+		// divPel1!.src = `./pelicans/${pel1}`;
 
-		console.dir(data);
-		div!.textContent = JSON.stringify(data);
+		const fetchJokes = async () => {
+		
+			// const div = document.getElementById("container");
+			// const divPel1 = document.getElementById("pel-img1");
 
-		divPel1.src = divPel1;
+			const data = (await fetch("https://v2.jokeapi.dev/joke/programming?blacklistFlags=nsfw&type=twopart")
+				.then(data => data.json()));
 
-	};
+			const setup = data.setup;
+			const delivery = data.delivery;
 
-	const fetchButton = document.getElementById("fetchButton")?.addEventListener("click", fetchJokes);
+			console.log(setup);
+			console.log(delivery);
+
+			// pelicanImgs[]
+
+			// console.dir(data);
+			// div!.textContent = JSON.stringify(data);
+
+			return data;
+
+		};
+
+		fetchJokes();
+		// console.log(fetchJokes());
+
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="hero">
+			<h1>Pelican't</h1>
+			<img style="max-height=100vh;" src={`./pelicans/${pel1}`} id="pel-img1"/>
+			<button id="fetchButton">Pelican</button>
+			<div id="container"></div>
+			<div id="joke-container">
+				<p id=""></p>
+				<p id=""></p>
+			</div>
+			</section>
+		</section>
+	</main>
+
+	<a href="https://astro.build/blog/astro-5/" id="news" class="box">
+		<p>donut</p>
+	</a>
+</div>
+
+<script>
+	// const fetchJokes = async () => {
+		
+	// 	const div = document.getElementById("container");
+	// 	const divPel1 = document.getElementById("pel-img1");
+
+	// 	const data = (await fetch("https://v2.jokeapi.dev/joke/programming?blacklistFlags=nsfw&type=twopart")
+	// 		.then(data => data.json()));
+
+	// 	const setup = data.setup;
+	// 	const delivery = data.delivery;
+
+
+	// 	// pelicanImgs[]
+
+	// 	console.dir(data);
+	// 	div!.textContent = JSON.stringify(data);
+
+	// 	return data;
+
+	// };
+
+	// const fetchImg = () => {
+
+	// }
+
+	// const fetchButton = document.getElementById("fetchButton")?.addEventListener("click", fetchJokes);
 </script>
 
 <style>
